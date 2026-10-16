@@ -17,6 +17,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ka">
+      <head>
+        <link rel="preload" href="/fonts/FiraGO-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/FiraGO-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body>{children}</body>
     </html>
   );
