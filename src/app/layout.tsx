@@ -9,14 +9,14 @@ const notoGeorgian = Noto_Sans_Georgian({
 });
 
 export const metadata: Metadata = {
-  title: "Honda სერვისი",
-  description: "Honda-ს ავტომობილების სერვისი, დიაგნოსტიკა და შეკეთება",
+  title: "Honda Parts — ნაწილები და სერვისი Honda FIT, HR-V და VEZEL-ისთვის",
+  description: "Honda FIT, HR-V და VEZEL-ის (2011–2025) ორიგინალი ნაწილები და სერვისი. შერჩევა VIN-ით, ძარის დეტალები, სავალი ნაწილი და კონსულტაცია.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ka" className={`${notoGeorgian.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="ka" className={`${notoGeorgian.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
