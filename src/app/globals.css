@@ -154,3 +154,21 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
 @media (min-width: 901px) {
   .hero-art img { object-position: right center; }
 }
+
+/* მენიუ: უფრო დიდი და მკვეთრი ტექსტი. */
+.desktop-nav { gap: 1.35rem; margin-left: 1rem; }
+.desktop-nav a {
+  font-size: 1rem;
+  color: #1c2733;
+  letter-spacing: .02em;
+  -webkit-text-stroke: 0.02em currentColor;
+}
+.mobile-nav > a { font-size: 1.1rem; -webkit-text-stroke: 0.02em currentColor; }
+@media (min-width: 901px) and (max-width: 1200px) {
+  .desktop-nav { gap: .85rem; margin-left: .3rem; }
+  .desktop-nav a { font-size: 1.05rem; }
+}
+@media (min-width: 901px) {
+  .header-phone span { font-size: .8rem; }
+  .header-cta { font-size: .95rem; }
+}
