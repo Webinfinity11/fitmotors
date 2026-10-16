@@ -16,26 +16,22 @@
   font-display: swap;
 }
 
-/* დიდ ეკრანებზე (>1440px) ბანერი ბოქსშია; გვერდებს ავსებს იგივე ფოტო გადღაბნილად, რომ კიდე მოჭრილი არ ჩანდეს. */
+/* დიდ ეკრანებზე (>1440px) ბანერი მთელ სიგანეზე იშლება პროპორციით, ტექსტი კი ბოქსში რჩება. */
 @media (min-width: 1441px) {
   .hero {
-    position: relative;
-    isolation: isolate;
-    background: #eef2f5;
+    background: #f4f7f9;
   }
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: url("/images/hero.webp") right center / cover no-repeat;
-    filter: blur(40px) saturate(0.9);
-    transform: scale(1.15);
-    opacity: 0.85;
+  .hero-inner {
+    max-width: none;
+    min-height: 42.3vw;
+    display: flex;
+    align-items: center;
+  }
+  .hero-inner > .container {
+    width: 92%;
   }
   .hero-art img {
     object-fit: cover;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 92%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 92%, transparent 100%);
+    object-position: right center;
   }
 }
