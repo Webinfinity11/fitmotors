@@ -106,3 +106,38 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
 
 /* ლოგოების თეთრი ფონი ფუტერის ფონში ჩაიძიროს. */
 .footer-badge img, .brand-wordmark img { mix-blend-mode: multiply; }
+
+/* წითელი დეკორატიული ხაზები მოხსნილია. */
+.eyebrow--line::before,
+.quality-intro::before,
+.footer-tagline::after {
+  content: none;
+  display: none;
+}
+
+/* ბანერი: მსუბუქი ოვერლეი ტექსტის მხარეს და უფრო გაშლილი ტექსტი. */
+.hero-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(244, 247, 249, 0.96) 0%, rgba(244, 247, 249, 0.82) 28%, rgba(244, 247, 249, 0.25) 48%, rgba(244, 247, 249, 0) 62%);
+  pointer-events: none;
+}
+@media (min-width: 901px) {
+  .hero-copy { width: 36rem; padding-top: 4.6rem; padding-bottom: 3rem; }
+  .hero .eyebrow { letter-spacing: .2rem; }
+  .hero h1 { margin-top: 1.4rem; line-height: 1.24; }
+  .hero-years { margin-top: 1.5rem; }
+  .hero-description { margin-top: .9rem; line-height: 1.85; max-width: 31rem; }
+  .hero-actions { margin-top: 2.2rem; gap: .9rem; }
+  .hero-benefits { margin-top: 2.6rem; gap: 2.2rem; }
+}
+@media (max-width: 900px) {
+  .hero-art::after { background: linear-gradient(180deg, rgba(244, 247, 249, 0.5) 0%, rgba(244, 247, 249, 0) 22%); }
+  .hero h1 { line-height: 1.25; }
+  .hero-description { line-height: 1.8; }
+}
+
+@media (min-width: 901px) {
+  .hero-art img { object-position: right center; }
+}
