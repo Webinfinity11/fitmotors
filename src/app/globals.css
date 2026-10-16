@@ -199,3 +199,25 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
 }
 
 .footer-badge { justify-content: flex-end; }
+
+/* ლოგო: FIT MOTORS ტექსტით (ვექტორული, ნებისმიერ ზომაზე მკვეთრი). */
+.brand-wordmark--text {
+  aspect-ratio: auto;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: .32em;
+  font-family: "FiraGO", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2.05rem;
+  line-height: 1;
+  letter-spacing: .03em;
+  -webkit-text-stroke: 0.02em currentColor;
+}
+.brand-fit { color: var(--red); font-style: italic; letter-spacing: .01em; }
+.brand-motors { color: #0b1117; }
+.brand-lockup .brand-caption { margin-top: .35rem; letter-spacing: .06em; }
+.dialog-topline .brand-wordmark--text { font-size: 1.8rem; }
+@media (max-width: 900px) { .brand-wordmark--text { font-size: 1.75rem; } }
+@media (max-width: 600px) { .brand-wordmark--text { font-size: 1.55rem; } }

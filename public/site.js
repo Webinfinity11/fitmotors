@@ -95,8 +95,16 @@ const SITE_CONFIG = Object.freeze({
     // A native <dialog> provides focus trapping, inert background and Escape.
     window.setTimeout(() => $('#customer-name').focus({ preventScroll: true }), 30);
   }
+  // ყველა 'დაგვიკავშირდით' / კონსულტაციის ღილაკი WhatsApp-ს ხსნის, თემის მიხედვით შევსებული ტექსტით.
+  const whatsappUrl = 'https://wa.me/995568380380';
   $$('[data-inquiry]').forEach(button => {
-    button.addEventListener('click', () => openInquiry(button.dataset.inquiry, button));
+    button.addEventListener('click', () => {
+      const key = button.dataset.inquiry;
+      const [title] = contexts[key] || contexts.consultation;
+      const text = key === 'consultation' ? 'გამარჯობა! მსურს კონსულტაცია.' : 'გამარჯობა! მაინტერესებს: ' + title;
+      closeMenu();
+      window.open(whatsappUrl + '?text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
+    });
   });
   $('.dialog-close', dialog).addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
@@ -141,7 +149,7 @@ const SITE_CONFIG = Object.freeze({
     if (!form.reportValidity()) return;
     const values = new FormData(form);
     const lines = [
-      'განაცხადი Honda Parts-ის ვებსაიტიდან',
+      'განაცხადი FIT MOTORS-ის ვებსაიტიდან',
       '',
       'თემა: ' + activeContext,
       'სახელი: ' + String(values.get('name')).trim(),
@@ -153,7 +161,7 @@ const SITE_CONFIG = Object.freeze({
     if (String(values.get('message') || '').trim()) lines.push('', 'კომენტარი: ' + String(values.get('message')).trim());
     requestText = lines.join('\n');
     $('#result-preview').textContent = requestText;
-    $('#email-request').href = 'mailto:' + SITE_CONFIG.email + '?subject=' + encodeURIComponent(activeContext + ' — Honda Parts') + '&body=' + encodeURIComponent(requestText);
+    $('#email-request').href = 'mailto:' + SITE_CONFIG.email + '?subject=' + encodeURIComponent(activeContext + ' — FIT MOTORS') + '&body=' + encodeURIComponent(requestText);
     form.hidden = true;
     result.hidden = false;
     $('#result-title').focus({ preventScroll: true });
