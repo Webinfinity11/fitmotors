@@ -16,3 +16,13 @@
   font-display: swap;
 }
 
+
+/* დიდ ეკრანებზე (>1440px) დიზაინი პროპორციულად იზრდება, რომ გვერდებზე სიცარიელე არ დარჩეს. */
+@media (min-width: 1440px) {
+  :root {
+    font-size: min(1.11111111vw, 28px);
+  }
+  .hero-art img {
+    object-fit: cover;
+  }
+}
