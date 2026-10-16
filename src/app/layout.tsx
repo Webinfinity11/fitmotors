@@ -1,21 +1,22 @@
-import type { Metadata } from "next";
-import { Noto_Sans_Georgian } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const notoGeorgian = Noto_Sans_Georgian({
-  variable: "--font-georgian",
-  subsets: ["georgian", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
 export const metadata: Metadata = {
-  title: "Honda Parts — ნაწილები და სერვისი Honda FIT, HR-V და VEZEL-ისთვის",
-  description: "Honda FIT, HR-V და VEZEL-ის (2011–2025) ორიგინალი ნაწილები და სერვისი. შერჩევა VIN-ით, ძარის დეტალები, სავალი ნაწილი და კონსულტაცია.",
+  title: "Honda Parts — ავტონაწილები და სერვისი Honda FIT, HR-V და VEZEL-ისთვის",
+  description:
+    "ავტონაწილები და სერვისი Honda FIT, HR-V და VEZEL-ისთვის, 2011–2025 წლების მოდელები. VIN-ით შერჩევა, ძარისა და სავალი ნაწილის დეტალები, კონსულტაცია.",
+  icons: {
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23ec0016'/%3E%3Ctext x='32' y='48' font-family='Arial' font-weight='900' font-size='46' text-anchor='middle' fill='white'%3EH%3C/text%3E%3C/svg%3E",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ec0016",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ka" className={`${notoGeorgian.variable}`}>
+    <html lang="ka">
       <body>{children}</body>
     </html>
   );
