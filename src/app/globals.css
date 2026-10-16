@@ -115,29 +115,42 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
   display: none;
 }
 
-/* ბანერი: მსუბუქი ოვერლეი ტექსტის მხარეს და უფრო გაშლილი ტექსტი. */
+/* ბანერი: მუქი ოვერლეი, თეთრი და გაშლილი ტექსტი. */
+.hero { background: #0b1117; }
 .hero-art::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(244, 247, 249, 0.96) 0%, rgba(244, 247, 249, 0.82) 28%, rgba(244, 247, 249, 0.25) 48%, rgba(244, 247, 249, 0) 62%);
+  background: linear-gradient(90deg, rgba(8, 12, 16, 0.95) 0%, rgba(8, 12, 16, 0.86) 30%, rgba(8, 12, 16, 0.45) 52%, rgba(8, 12, 16, 0.12) 72%, rgba(8, 12, 16, 0.05) 100%);
   pointer-events: none;
 }
+.hero .eyebrow { color: #ff4d5e; }
+.hero h1 { color: #fff; }
+.hero h1 em { color: #ff2a3d; }
+.hero-years { color: #fff; }
+.hero-description { color: #d3d9e0; }
+.hero-benefit { color: #e6eaee; }
+.hero-benefit .icon { color: #fff; }
+.hero-actions .btn--outline { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.7); }
+.hero-actions .btn--outline:hover { background: #fff; color: var(--ink); border-color: #fff; }
 @media (min-width: 901px) {
-  .hero-copy { width: 36rem; padding-top: 4.6rem; padding-bottom: 3rem; }
-  .hero .eyebrow { letter-spacing: .2rem; }
-  .hero h1 { margin-top: 1.4rem; line-height: 1.24; }
-  .hero-years { margin-top: 1.5rem; }
-  .hero-description { margin-top: .9rem; line-height: 1.85; max-width: 31rem; }
-  .hero-actions { margin-top: 2.2rem; gap: .9rem; }
-  .hero-benefits { margin-top: 2.6rem; gap: 2.2rem; }
+  .hero-copy { width: 40rem; padding-top: 4.6rem; padding-bottom: 3.2rem; }
+  .hero .eyebrow { letter-spacing: .24rem; }
+  .hero h1 { font-size: 3.6rem; margin-top: 1.5rem; line-height: 1.24; letter-spacing: .01em; }
+  .hero-years { margin-top: 1.6rem; font-size: 1.3rem; letter-spacing: .02em; }
+  .hero-description { margin-top: 1rem; font-size: 1.08rem; line-height: 1.9; max-width: 34rem; letter-spacing: .02em; }
+  .hero-actions { margin-top: 2.4rem; gap: 1rem; }
+  .hero-benefits { margin-top: 2.8rem; gap: 2.6rem; }
+  .hero-benefit { font-size: .82rem; letter-spacing: .02em; }
 }
 @media (max-width: 900px) {
-  .hero-art::after { background: linear-gradient(180deg, rgba(244, 247, 249, 0.5) 0%, rgba(244, 247, 249, 0) 22%); }
+  .hero-art::after { background: linear-gradient(180deg, #0b1117 0%, rgba(11, 17, 23, 0.35) 18%, rgba(11, 17, 23, 0) 40%); }
   .hero h1 { line-height: 1.25; }
-  .hero-description { line-height: 1.8; }
+  .hero-description { line-height: 1.85; }
 }
-
+@media (min-width: 601px) and (max-width: 900px) {
+  .hero-art::after { background: linear-gradient(90deg, #0b1117 0%, rgba(11, 17, 23, 0.6) 30%, rgba(11, 17, 23, 0) 60%); }
+}
 @media (min-width: 901px) {
   .hero-art img { object-position: right center; }
 }
