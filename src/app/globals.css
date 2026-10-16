@@ -180,3 +180,15 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
 @media (max-width: 600px) {
   .hero h1 { letter-spacing: .035em; word-spacing: .08em; }
 }
+
+/* მოდელების ფოტოები: მსუბუქი შავი ოვერლეი და თეთრი ტექსტი. */
+.model-scene::after {
+  background: linear-gradient(180deg, rgba(8, 12, 16, 0.72) 0%, rgba(8, 12, 16, 0.42) 32%, rgba(8, 12, 16, 0.12) 60%, rgba(8, 12, 16, 0.06) 100%);
+}
+.model-info,
+.model-info h3,
+.model-years,
+.model-description {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
