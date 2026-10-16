@@ -221,3 +221,16 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
 .dialog-topline .brand-wordmark--text { font-size: 1.8rem; }
 @media (max-width: 900px) { .brand-wordmark--text { font-size: 1.75rem; } }
 @media (max-width: 600px) { .brand-wordmark--text { font-size: 1.55rem; } }
+
+/* ფუტერი: კონტაქტები ორ სვეტად, რომ მარჯვენა მხარე ცარიელი არ დარჩეს. */
+@media (min-width: 901px) {
+  .site-footer .footer-grid { position: relative; grid-template-columns: 1.45fr .9fr 1fr 2.6fr; }
+  .footer-contact-list {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+  .footer-badge { position: absolute; right: 0; bottom: 0; }
+}
