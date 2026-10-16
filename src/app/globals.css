@@ -172,3 +172,11 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
   .header-phone span { font-size: .8rem; }
   .header-cta { font-size: .95rem; }
 }
+
+/* ჰეროს მთავარი სათაური — ოდნავ გაშლილი. */
+@media (min-width: 601px) {
+  .hero h1 { letter-spacing: .06em; word-spacing: .12em; }
+}
+@media (max-width: 600px) {
+  .hero h1 { letter-spacing: .035em; word-spacing: .08em; }
+}
