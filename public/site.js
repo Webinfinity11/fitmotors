@@ -6,7 +6,7 @@ const SITE_CONFIG = Object.freeze({
   phoneLabel: '+995 568 380 380',
   email: 'info@fitmotors.ge',
   address: 'Evgenia Maisuradze St, Tbilisi 0100',
-  hours: 'სამ–კვ 09:00–20:00 · ორშ. დასვენება',
+  hours: 'სამ–კვ 09:00–20:00',
   socialLinks: { facebook: '', instagram: '' }
 });
 
