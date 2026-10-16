@@ -4,9 +4,9 @@
 const SITE_CONFIG = Object.freeze({
   phone: '+995568380380',
   phoneLabel: '+995 568 380 380',
-  email: 'info@honda-parts.ru',
+  email: 'info@fitmotors.ge',
   address: 'Evgenia Maisuradze St, Tbilisi 0100',
-  hours: 'ყოველდღე 09:00–20:00',
+  hours: 'სამ–კვ 09:00–20:00 · ორშ. დასვენება',
   socialLinks: { facebook: '', instagram: '' }
 });
 
