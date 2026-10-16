@@ -197,3 +197,5 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
 .model-scene::after {
   background: linear-gradient(180deg, rgba(8, 12, 16, 0.85) 0%, rgba(8, 12, 16, 0.6) 35%, rgba(8, 12, 16, 0.3) 65%, rgba(8, 12, 16, 0.18) 100%);
 }
+
+.footer-badge { justify-content: flex-end; }
