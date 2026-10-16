@@ -234,3 +234,34 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
   }
   .footer-badge { position: absolute; right: 0; bottom: 0; }
 }
+
+/* მობილური ჰედერი: ლოგო მარცხნივ, ნომერი წითელ ღილაკად. */
+@media (max-width: 900px) {
+  .brand-lockup { width: auto; align-items: flex-start; }
+  .brand-wordmark--text { justify-content: flex-start; }
+  .brand-lockup .brand-caption { text-align: left; }
+  .header-phone {
+    margin-left: auto;
+    gap: .45rem;
+    padding: .55rem .8rem;
+    border-radius: .45rem;
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 .35rem .9rem #ec00162e;
+  }
+  .header-phone > .icon { color: #fff; fill: #fff; width: 1.05rem; height: 1.05rem; }
+  .header-phone div { display: block; }
+  .header-phone strong { font-size: .88rem; line-height: 1.1; white-space: nowrap; }
+  .header-phone span { display: none; }
+}
+@media (max-width: 600px) {
+  .header-inner { gap: .5rem; }
+  .brand-wordmark--text { font-size: 1.35rem; }
+  .brand-lockup .brand-caption { font-size: .5rem; }
+  .header-phone { padding: .5rem .6rem; gap: .35rem; }
+  .header-phone strong { font-size: .78rem; }
+}
+@media (max-width: 370px) {
+  .brand-wordmark--text { font-size: 1.15rem; }
+  .header-phone strong { font-size: .7rem; }
+}
