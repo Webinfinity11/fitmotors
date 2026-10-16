@@ -1,5 +1,14 @@
 @import "./design.css";
 
+/* ქართული ტექსტი — BPG Nino Mtavruli (bold სისქეებზე ბრაუზერი ამუქებს); ლათინური და ციფრები — FiraGO. */
+@font-face {
+  font-family: "BPG Nino Mtavruli";
+  src: url("/fonts/BPGNinoMtavruli.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "FiraGO";
   src: url("/fonts/FiraGO-Regular.woff2") format("woff2");
@@ -34,4 +43,29 @@
     object-fit: cover;
     object-position: right center;
   }
+}
+
+body {
+  font-family: "BPG Nino Mtavruli", "FiraGO", "Noto Sans Georgian", "Segoe UI", Arial, sans-serif;
+  font-synthesis: weight;
+}
+
+/* Nino Mtavruli-ს bold ვერსია არ აქვს — სქელ ტექსტს კონტურით ვამუქებთ. */
+h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
+.form-field > span, .brand-caption, .hero-art-note, .footer-tagline,
+.asset-download, .footer-contact-list a:first-child, .desktop-nav a.active {
+  -webkit-text-stroke: 0.025em currentColor;
+}
+
+/* მოდელების ახალ ფოტოებზე ტექსტი რომ იკითხებოდეს. */
+.model-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 58%;
+  background: linear-gradient(180deg, rgba(240, 243, 245, 0.92) 0%, rgba(240, 243, 245, 0.7) 55%, rgba(240, 243, 245, 0) 100%);
+  pointer-events: none;
+}
+.model-info {
+  z-index: 1;
 }

@@ -2,10 +2,10 @@
 /* Public contact details taken from the mockup. Replace before publishing.
    Empty social links deliberately show a notice, not an unrelated profile. */
 const SITE_CONFIG = Object.freeze({
-  phone: '+74951234567',
-  phoneLabel: '+7 (495) 123-45-67',
+  phone: '+995568380380',
+  phoneLabel: '+995 568 380 380',
   email: 'info@honda-parts.ru',
-  address: 'მოსკოვი, ავტომობილნაიას ქ. 1',
+  address: 'Evgenia Maisuradze St, Tbilisi 0100',
   hours: 'ყოველდღე 09:00–20:00',
   socialLinks: { vk: '', telegram: '', youtube: '' }
 });
