@@ -57,15 +57,52 @@ h1, h2, h3, strong, b, .btn, .eyebrow, .hero-years, .contact-phone,
   -webkit-text-stroke: 0.025em currentColor;
 }
 
-/* მოდელების ახალ ფოტოებზე ტექსტი რომ იკითხებოდეს. */
+/* მოდელების ფოტოებზე მსუბუქი ოვერლეი, რომ ტექსტი იკითხებოდეს. */
 .model-scene::after {
   content: "";
   position: absolute;
-  inset: 0 0 auto;
-  height: 58%;
-  background: linear-gradient(180deg, rgba(240, 243, 245, 0.92) 0%, rgba(240, 243, 245, 0.7) 55%, rgba(240, 243, 245, 0) 100%);
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(244, 247, 249, 0.94) 0%, rgba(244, 247, 249, 0.78) 30%, rgba(244, 247, 249, 0.2) 58%, rgba(244, 247, 249, 0) 75%),
+    rgba(11, 17, 23, 0.04);
   pointer-events: none;
 }
 .model-info {
   z-index: 1;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
 }
+
+/* სოციალური ქსელები — ბრენდის ფერებით. */
+.socials { gap: .7rem; }
+.social-link {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 0 .35rem .9rem #0b111714;
+}
+.social-link .icon { width: 1.3rem; height: 1.3rem; }
+.social-link--facebook { background: #1877f2; }
+.social-link--instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+.social-link--whatsapp { background: #25d366; }
+.social-link:hover { color: #fff; transform: translateY(-3px); box-shadow: 0 .6rem 1.2rem #0b111726; }
+
+/* ფუტერის საკონტაქტო აიქონები. */
+.footer-contact-list { gap: .7rem; }
+.footer-contact-list .icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: .48rem;
+  border-radius: .55rem;
+  background: #fff0f2;
+  color: var(--red);
+  stroke-width: 2;
+  flex-shrink: 0;
+  transition: background .2s, color .2s;
+}
+.footer-contact-list a:hover .icon { background: var(--red); color: #fff; }
+.footer-contact-list .icon--whatsapp { background: #e7f9ee; color: #1fa855; fill: currentColor; stroke: none; }
+.footer-contact-list a:hover .icon--whatsapp { background: #25d366; color: #fff; }
+
+/* ლოგოების თეთრი ფონი ფუტერის ფონში ჩაიძიროს. */
+.footer-badge img, .brand-wordmark img { mix-blend-mode: multiply; }

@@ -7,7 +7,7 @@ const SITE_CONFIG = Object.freeze({
   email: 'info@honda-parts.ru',
   address: 'Evgenia Maisuradze St, Tbilisi 0100',
   hours: 'ყოველდღე 09:00–20:00',
-  socialLinks: { vk: '', telegram: '', youtube: '' }
+  socialLinks: { facebook: '', instagram: '' }
 });
 
 (() => {
