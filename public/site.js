@@ -6,7 +6,7 @@ const SITE_CONFIG = Object.freeze({
   phoneLabel: '+995 568 380 380',
   email: 'info@fitmotors.ge',
   address: 'Evgenia Maisuradze St, Tbilisi 0100',
-  hours: 'სამ–კვ 09:00–20:00',
+  hours: 'სამ-კვ 09:00-20:00',
   socialLinks: { facebook: '', instagram: '' }
 });
 
@@ -66,15 +66,15 @@ const SITE_CONFIG = Object.freeze({
   });
 
   const contexts = {
-    consultation: ['მიიღეთ კონსულტაცია', 'მოგვწერეთ, რა სჭირდება თქვენს Honda-ს. მიუთითეთ მოდელი, გამოშვების წელი და სასურველი ნაწილი — ეს სპეციალისტს დახმარებას გაუადვილებს.'],
+    consultation: ['მიიღეთ კონსულტაცია', 'მოგვწერეთ, რა სჭირდება თქვენს Honda-ს. მიუთითეთ მოდელი, გამოშვების წელი და სასურველი ნაწილი - ეს სპეციალისტს დახმარებას გაუადვილებს.'],
     vin: ['ავტონაწილების შერჩევა VIN-ით', 'დაგეხმარებით თავსებადი ნაწილების VIN-კოდით შერჩევაში. VIN მიუთითეთ ფორმაში; იაპონური ბაზრის ავტომობილის შემთხვევაში ძარის ნომერი ჩაწერეთ კომენტარში.'],
-    diagnostic: ['Honda-ს დიაგნოსტიკა', 'აღწერეთ პრობლემა ან სიმპტომები. მიუთითეთ მოდელი და გამოშვების წელი — სპეციალისტი გირჩევთ შემდეგ ნაბიჯს.'],
+    diagnostic: ['Honda-ს დიაგნოსტიკა', 'აღწერეთ პრობლემა ან სიმპტომები. მიუთითეთ მოდელი და გამოშვების წელი - სპეციალისტი გირჩევთ შემდეგ ნაბიჯს.'],
     body: ['Honda-ს ძარის ნაწილები', 'ორიგინალი ნაწილები და ხარისხიანი ანალოგები ძარის შესაკეთებლად. მიუთითეთ სასურველი ნაწილი, მოდელი და გამოშვების წელი.'],
     suspension: ['Honda-ს სავალი ნაწილი', 'დაკიდების, სამუხრუჭე სისტემისა და საჭის მექანიზმის ნაწილების შერჩევა. მიუთითეთ მოდელი, წელი და საჭირო ნაწილი.'],
     delivery: ['მიწოდების დაზუსტება', 'კომენტარში მიუთითეთ საჭირო ნაწილი და ქალაქი. სპეციალისტი დაგიზუსტებთ მარაგს, მიღების გზასა და მიწოდების ფასს.'],
-    fit: ['ავტონაწილები Honda FIT-ისთვის', 'Honda FIT · 2011–2025. ორიგინალი ნაწილებისა და ხარისხიანი ანალოგების შერჩევა მოდელის, გამოშვების წლის ან VIN-ის მიხედვით.'],
-    hrv: ['ავტონაწილები Honda HR-V-ისთვის', 'Honda HR-V · 2011–2025. ძარისა და სავალი ნაწილის დეტალები, ორიგინალი ნაწილები და ხარისხიანი ანალოგები.'],
-    vezel: ['ავტონაწილები Honda VEZEL-ისთვის', 'Honda VEZEL · 2011–2025. დაგეხმარებით საჭირო ნაწილების პოვნასა და თქვენს ავტომობილთან თავსებადობის შემოწმებაში.']
+    fit: ['ავტონაწილები Honda FIT-ისთვის', 'Honda FIT · 2011-2025. ორიგინალი ნაწილებისა და ხარისხიანი ანალოგების შერჩევა მოდელის, გამოშვების წლის ან VIN-ის მიხედვით.'],
+    hrv: ['ავტონაწილები Honda HR-V-ისთვის', 'Honda HR-V · 2011-2025. ძარისა და სავალი ნაწილის დეტალები, ორიგინალი ნაწილები და ხარისხიანი ანალოგები.'],
+    vezel: ['ავტონაწილები Honda VEZEL-ისთვის', 'Honda VEZEL · 2011-2025. დაგეხმარებით საჭირო ნაწილების პოვნასა და თქვენს ავტომობილთან თავსებადობის შემოწმებაში.']
   };
   const modelValues = { fit: 'Honda FIT', hrv: 'Honda HR-V', vezel: 'Honda VEZEL' };
   function openInquiry(key, trigger) {
@@ -161,7 +161,7 @@ const SITE_CONFIG = Object.freeze({
     if (String(values.get('message') || '').trim()) lines.push('', 'კომენტარი: ' + String(values.get('message')).trim());
     requestText = lines.join('\n');
     $('#result-preview').textContent = requestText;
-    $('#email-request').href = 'mailto:' + SITE_CONFIG.email + '?subject=' + encodeURIComponent(activeContext + ' — FIT MOTORS') + '&body=' + encodeURIComponent(requestText);
+    $('#email-request').href = 'mailto:' + SITE_CONFIG.email + '?subject=' + encodeURIComponent(activeContext + ' - FIT MOTORS') + '&body=' + encodeURIComponent(requestText);
     form.hidden = true;
     result.hidden = false;
     $('#result-title').focus({ preventScroll: true });
@@ -206,7 +206,8 @@ const SITE_CONFIG = Object.freeze({
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   });
-  if ('IntersectionObserver' in window) {
+  // სექციების მიხედვით მონიშვნა მხოლოდ მთავარ გვერდზეა; შიდა გვერდებს მონიშნული ბმული უკვე აქვთ.
+  if ('IntersectionObserver' in window && location.pathname === '/') {
     const navLinks = $$('.desktop-nav a');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -224,6 +225,155 @@ const SITE_CONFIG = Object.freeze({
   }
 })();
 
+
+// მთავარი გვერდის ძიება: აკრეფისას ბაზიდან სთავაზობს ნაწილებს და /parts-ზე გადაჰყავს.
+// JavaScript-ის გარეშეც მუშაობს, როგორც ჩვეულებრივი GET ფორმა.
+(() => {
+  const form = document.querySelector('[data-part-search]');
+  if (!form) return;
+  const input = form.elements.q;
+  const model = form.elements.model;
+  const list = document.getElementById('part-suggestions');
+  let timer;
+  let controller;
+  let activeIndex = -1;
+
+  const partsUrl = q => {
+    const params = new URLSearchParams();
+    if (model.value) params.set('model', model.value);
+    if (q) params.set('q', q);
+    const query = params.toString();
+    return query ? '/parts?' + query : '/parts';
+  };
+  const options = () => [...list.querySelectorAll('[role="option"]')];
+
+  function close() {
+    clearTimeout(timer);
+    controller?.abort();
+    list.hidden = true;
+    list.replaceChildren();
+    activeIndex = -1;
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+  }
+
+  function setActive(index) {
+    const items = options();
+    items[activeIndex]?.setAttribute('aria-selected', 'false');
+    activeIndex = index;
+    const item = items[index];
+    if (item) {
+      item.setAttribute('aria-selected', 'true');
+      item.scrollIntoView({ block: 'nearest' });
+      input.setAttribute('aria-activedescendant', item.id);
+    } else {
+      input.removeAttribute('aria-activedescendant');
+    }
+  }
+
+  function option(href, id, children, className) {
+    const link = document.createElement('a');
+    link.href = href;
+    link.id = id;
+    link.className = className;
+    link.setAttribute('role', 'option');
+    link.setAttribute('aria-selected', 'false');
+    link.append(...children);
+    return link;
+  }
+
+  function span(className, text) {
+    const el = document.createElement('span');
+    el.className = className;
+    el.textContent = text;
+    return el;
+  }
+
+  function render(q, suggestions) {
+    const nodes = suggestions.map((part, index) => {
+      let thumb;
+      if (part.imageUrl) {
+        thumb = document.createElement('img');
+        thumb.src = '/_next/image?url=' + encodeURIComponent(part.imageUrl) + '&w=96&q=75';
+        thumb.alt = '';
+        thumb.width = 48;
+        thumb.height = 48;
+        thumb.className = 'suggestion-thumb';
+      } else {
+        thumb = span('suggestion-thumb', '');
+      }
+      const text = document.createElement('span');
+      text.className = 'suggestion-text';
+      const meta = [part.oemCode, part.models.join(' · ')].filter(Boolean).join(' - ');
+      text.append(span('suggestion-name', part.name), span('suggestion-meta', meta));
+      return option('/parts/' + part.id, 'part-suggestion-' + index, [thumb, text], 'suggestion');
+    });
+
+    if (nodes.length) {
+      nodes.push(option(partsUrl(q), 'part-suggestion-all', [span('suggestion-name', 'ყველა შედეგის ნახვა: „' + q + '“')], 'suggestion suggestion--all'));
+    } else {
+      const empty = document.createElement('p');
+      empty.className = 'suggestion-empty';
+      empty.textContent = 'ნაწილი ვერ მოიძებნა.';
+      nodes.push(empty, option(partsUrl(''), 'part-suggestion-all', [span('suggestion-name', 'ყველა ნაწილის ნახვა')], 'suggestion suggestion--all'));
+    }
+
+    list.replaceChildren(...nodes);
+    list.hidden = false;
+    activeIndex = -1;
+    input.setAttribute('aria-expanded', 'true');
+    input.removeAttribute('aria-activedescendant');
+  }
+
+  function search() {
+    clearTimeout(timer);
+    const q = input.value.trim();
+    if (q.length < 2) {
+      close();
+      return;
+    }
+    timer = setTimeout(async () => {
+      controller?.abort();
+      const current = new AbortController();
+      controller = current;
+      try {
+        const params = new URLSearchParams({ q });
+        if (model.value) params.set('model', model.value);
+        const response = await fetch('/api/parts/suggest?' + params, { signal: current.signal });
+        if (!response.ok) throw new Error('Suggest failed');
+        const data = await response.json();
+        if (controller === current) render(q, data.suggestions);
+      } catch (error) {
+        // ჩავარდნისას ფორმა ისევ მუშაობს, უბრალოდ შეთავაზებების გარეშე.
+        if (error.name !== 'AbortError') close();
+      }
+    }, 200);
+  }
+
+  input.addEventListener('input', search);
+  input.addEventListener('focus', search);
+  model.addEventListener('change', search);
+  input.addEventListener('keydown', event => {
+    const items = options();
+    if (event.key === 'Escape') {
+      close();
+    } else if (!list.hidden && items.length && event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActive((activeIndex + 1) % items.length);
+    } else if (!list.hidden && items.length && event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActive((activeIndex - 1 + items.length) % items.length);
+    }
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const active = options()[activeIndex];
+    window.location.assign(active ? active.href : partsUrl(input.value.trim()));
+  });
+  document.addEventListener('click', event => {
+    if (!form.contains(event.target)) close();
+  });
+})();
 
 // Photos are independent files in the source package and data URIs in the
 // single-file edition. Both editions support individual image downloads.
