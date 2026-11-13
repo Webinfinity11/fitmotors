@@ -4,6 +4,7 @@ import { upload } from "@vercel/blob/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { compressToWebp } from "@/lib/compress-image";
 import { CAR_MODELS, CAR_MODEL_SLUGS, type CarModelSlug } from "@/lib/models";
 import { savePart } from "../actions";
 import { ActionForm, SubmitButton } from "./action-form";
@@ -28,6 +29,8 @@ export type PartFormValues = {
   isPublished: boolean;
 };
 
+const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
+
 export function PartForm({ categories, part }: { categories: CategoryOption[]; part?: PartFormValues }) {
   const [categoryId, setCategoryId] = useState(part ? String(part.categoryId) : "");
   const [subcategoryId, setSubcategoryId] = useState(part?.subcategoryId ? String(part.subcategoryId) : "");
@@ -48,8 +51,15 @@ export function PartForm({ categories, part }: { categories: CategoryOption[]; p
     setUploadError(null);
     setUploading(true);
     try {
-      const safeName = file.name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
-      const blob = await upload(`parts/${safeName}`, file, {
+      let optimized = file;
+      try {
+        optimized = await compressToWebp(file);
+      } catch {
+        // ბრაუზერმა ფოტო ვერ წაიკითხა, ვტვირთავთ ორიგინალს.
+      }
+      if (optimized.size > MAX_UPLOAD_BYTES) throw new Error("Too large");
+      const safeName = optimized.name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
+      const blob = await upload(`parts/${safeName}`, optimized, {
         access: "public",
         handleUploadUrl: "/api/admin/upload",
       });
@@ -188,7 +198,8 @@ export function PartForm({ categories, part }: { categories: CategoryOption[]; p
               disabled={uploading}
               onChange={(event) => handleFile(event.target.files?.[0])}
             />
-            {uploading && <p className="admin-note">იტვირთება…</p>}
+            <p className="admin-note">ფოტო ავტომატურად შემცირდება და გადავა WEBP ფორმატში.</p>
+            {uploading && <p className="admin-note">მუშავდება და იტვირთება…</p>}
             {uploadError && (
               <p className="admin-error" role="alert">
                 {uploadError}
