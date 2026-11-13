@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { requireAdmin } from "@/lib/auth";
 import { CAR_MODELS, formatPrice, modelShortName } from "@/lib/models";
 import { PAGE_SIZE, parseFilters, queryCategoryTree, queryParts } from "@/lib/parts-query";
-import { deletePart, setPartPublished } from "../../actions";
+import { deletePart, setPartPublished, setPartStock } from "../../actions";
 import { ActionForm, ConfirmSubmit, SubmitButton } from "../../_components/action-form";
 
 export default function AdminPartsPage({ searchParams }: PageProps<"/admin/parts">) {
@@ -27,8 +27,8 @@ async function PartsList({ searchParams }: Pick<PageProps<"/admin/parts">, "sear
   await requireAdmin();
   const filters = parseFilters(await searchParams);
   const [{ rows, total }, tree] = await Promise.all([
-    queryParts(filters, { onlyPublished: false }),
-    queryCategoryTree({ onlyPublished: false }),
+    queryParts(filters, { onlyVisible: false }),
+    queryCategoryTree({ onlyVisible: false }),
   ]);
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
@@ -90,6 +90,7 @@ async function PartsList({ searchParams }: Pick<PageProps<"/admin/parts">, "sear
                 <th>კატეგორია</th>
                 <th>მოდელები</th>
                 <th>ფასი</th>
+                <th>მარაგი</th>
                 <th>სტატუსი</th>
                 <th aria-label="მოქმედებები" />
               </tr>
@@ -133,9 +134,32 @@ async function PartsList({ searchParams }: Pick<PageProps<"/admin/parts">, "sear
                   </td>
                   <td className="admin-nowrap">{formatPrice(part.price) ?? "-"}</td>
                   <td>
-                    <span className={part.isPublished ? "admin-status admin-status--on" : "admin-status"}>
-                      {part.isPublished ? "საიტზეა" : "დამალულია"}
-                    </span>
+                    <ActionForm action={setPartStock} className="admin-stock-form">
+                      <input type="hidden" name="id" value={part.id} />
+                      <input
+                        key={part.stock}
+                        name="stock"
+                        type="number"
+                        required
+                        min={0}
+                        max={999999}
+                        step={1}
+                        inputMode="numeric"
+                        aria-label={`${part.name}: მარაგი`}
+                        defaultValue={part.stock}
+                        className="admin-stock-input"
+                      />
+                      <SubmitButton className="admin-btn admin-btn--ghost">შენახვა</SubmitButton>
+                    </ActionForm>
+                  </td>
+                  <td>
+                    {!part.isPublished ? (
+                      <span className="admin-status">დამალულია</span>
+                    ) : part.stock === 0 ? (
+                      <span className="admin-status admin-status--out">მარაგი ამოიწურა</span>
+                    ) : (
+                      <span className="admin-status admin-status--on">საიტზეა</span>
+                    )}
                   </td>
                   <td>
                     <div className="admin-row-actions">

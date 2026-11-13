@@ -18,6 +18,6 @@ export default function NewPartPage() {
 
 async function NewPartForm() {
   await requireAdmin();
-  const tree = await queryCategoryTree({ onlyPublished: false });
+  const tree = await queryCategoryTree({ onlyVisible: false });
   return <PartForm categories={tree} />;
 }

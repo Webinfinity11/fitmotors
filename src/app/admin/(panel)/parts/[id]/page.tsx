@@ -27,7 +27,7 @@ async function EditPartForm({ params }: Pick<PageProps<"/admin/parts/[id]">, "pa
 
   const [[part], tree] = await Promise.all([
     getDb().select().from(parts).where(eq(parts.id, Number(id))),
-    queryCategoryTree({ onlyPublished: false }),
+    queryCategoryTree({ onlyVisible: false }),
   ]);
   if (!part) notFound();
 
@@ -47,6 +47,7 @@ async function EditPartForm({ params }: Pick<PageProps<"/admin/parts/[id]">, "pa
         categoryId: parent?.id ?? part.categoryId,
         subcategoryId: parent ? part.categoryId : null,
         models: part.models,
+        stock: part.stock,
         isPublished: part.isPublished,
       }}
     />

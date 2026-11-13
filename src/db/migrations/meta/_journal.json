@@ -15,6 +15,13 @@
       "when": 1793875041145,
       "tag": "0001_remove_in_stock",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794554375065,
+      "tag": "0002_add_stock",
+      "breakpoints": true
     }
   ]
 }

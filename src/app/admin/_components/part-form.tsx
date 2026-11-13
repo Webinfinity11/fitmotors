@@ -24,6 +24,7 @@ export type PartFormValues = {
   categoryId: number;
   subcategoryId: number | null;
   models: CarModelSlug[];
+  stock: number;
   isPublished: boolean;
 };
 
@@ -82,6 +83,20 @@ export function PartForm({ categories, part }: { categories: CategoryOption[]; p
             placeholder="ცარიელი = ფასი შეთანხმებით"
             defaultValue={part?.price ?? ""}
           />
+        </label>
+        <label className="admin-field">
+          <span>მარაგი (ცალი) *</span>
+          <input
+            name="stock"
+            type="number"
+            required
+            min={0}
+            max={999999}
+            step={1}
+            inputMode="numeric"
+            defaultValue={part?.stock ?? 1}
+          />
+          <small className="admin-note">0-ის შემთხვევაში ნაწილი საიტზე არ გამოჩნდება.</small>
         </label>
         <label className="admin-field admin-field--full">
           <span>აღწერა</span>

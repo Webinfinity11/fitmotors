@@ -19,7 +19,7 @@ export async function getCatalogParts(filters: PartFilters) {
   "use cache";
   cacheTag(CATALOG_TAG);
   cacheLife(CATALOG_LIFE);
-  return queryParts(filters, { onlyPublished: true });
+  return queryParts(filters, { onlyVisible: true });
 }
 
 export async function getCatalogPart(id: number) {
@@ -47,5 +47,5 @@ export async function getCatalogCategories(model: CarModelSlug | undefined) {
   "use cache";
   cacheTag(CATALOG_TAG);
   cacheLife(CATALOG_LIFE);
-  return queryCategoryTree({ onlyPublished: true, model });
+  return queryCategoryTree({ onlyVisible: true, model });
 }

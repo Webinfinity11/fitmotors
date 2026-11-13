@@ -135,6 +135,13 @@ export async function deleteCategory(_: ActionState, form: FormData): Promise<Ac
 
 /* ---------- ნაწილები ---------- */
 
+const STOCK_ERROR = "მარაგი უნდა იყოს მთელი რიცხვი 0-დან 999999-მდე.";
+
+function stockField(form: FormData): number | null {
+  const value = text(form, "stock");
+  return /^\d{1,6}$/.test(value) ? Number(value) : null;
+}
+
 function isBlobUrl(value: string): boolean {
   try {
     const url = new URL(value);
@@ -157,12 +164,14 @@ export async function savePart(_: ActionState, form: FormData): Promise<ActionSt
   const categoryId = intField(form, "categoryId");
   const subcategoryId = intField(form, "subcategoryId");
   const models = [...new Set(form.getAll("models"))].filter(isCarModel) as CarModelSlug[];
+  const stock = stockField(form);
 
   if (!name || name.length > 200) return { error: "მიუთითეთ ნაწილის დასახელება (მაქსიმუმ 200 სიმბოლო)." };
   if (oemCode.length > 80) return { error: "კოდი ძალიან გრძელია (მაქსიმუმ 80 სიმბოლო)." };
   if (description.length > 5000) return { error: "აღწერა ძალიან გრძელია (მაქსიმუმ 5000 სიმბოლო)." };
   if (priceInput && !/^\d{1,8}(\.\d{1,2})?$/.test(priceInput)) return { error: "ფასი არასწორია. მაგალითი: 120 ან 120.50" };
   if (imageUrl && !isBlobUrl(imageUrl)) return { error: "ფოტოს ბმული არასწორია. ატვირთეთ ფოტო თავიდან." };
+  if (stock === null) return { error: STOCK_ERROR };
   if (models.length === 0) return { error: "აირჩიეთ მინიმუმ ერთი მოდელი." };
   if (categoryId === null) return { error: "აირჩიეთ კატეგორია." };
 
@@ -182,6 +191,7 @@ export async function savePart(_: ActionState, form: FormData): Promise<ActionSt
     imageUrl: imageUrl || null,
     categoryId: targetId,
     models,
+    stock,
     isPublished: form.get("isPublished") === "on",
   };
 
@@ -218,6 +228,18 @@ export async function setPartPublished(_: ActionState, form: FormData): Promise<
     .update(parts)
     .set({ isPublished: form.get("publish") === "1", updatedAt: new Date() })
     .where(eq(parts.id, id));
+  refreshCatalog();
+  return { ok: true };
+}
+
+export async function setPartStock(_: ActionState, form: FormData): Promise<ActionState> {
+  await requireAdmin();
+  const id = intField(form, "id");
+  if (id === null) return { error: "ნაწილი ვერ მოიძებნა." };
+  const stock = stockField(form);
+  if (stock === null) return { error: STOCK_ERROR };
+
+  await getDb().update(parts).set({ stock, updatedAt: new Date() }).where(eq(parts.id, id));
   refreshCatalog();
   return { ok: true };
 }

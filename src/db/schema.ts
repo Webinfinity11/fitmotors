@@ -45,6 +45,8 @@ export const parts = pgTable(
       .notNull()
       .references(() => categories.id, { onDelete: "restrict" }),
     models: carModel().array().notNull(),
+    // მარაგი 0 = ნაწილი საიტზე ავტომატურად აღარ ჩანს.
+    stock: integer().notNull().default(0),
     isPublished: boolean("is_published").notNull().default(true),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
@@ -55,5 +57,6 @@ export const parts = pgTable(
     index("parts_created_idx").on(t.createdAt.desc()),
     check("parts_models_not_empty", sql`cardinality(${t.models}) > 0`),
     check("parts_price_not_negative", sql`${t.price} >= 0`),
+    check("parts_stock_not_negative", sql`${t.stock} >= 0`),
   ],
 );

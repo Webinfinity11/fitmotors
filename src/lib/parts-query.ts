@@ -1,5 +1,5 @@
 import "server-only";
-import { and, arrayContains, asc, count, desc, eq, gte, ilike, lte, max, min, or } from "drizzle-orm";
+import { and, arrayContains, asc, count, desc, eq, gt, gte, ilike, lte, max, min, or } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
 import { getDb } from "@/db";
 import { categories, parts } from "@/db/schema";
@@ -58,6 +58,9 @@ export function parseFilters(params: RawSearchParams): PartFilters {
 
 const parentCategory = alias(categories, "parent_category");
 
+// საიტზე ჩანს მხოლოდ გამოქვეყნებული ნაწილი, რომლის მარაგიც 0-ზე მეტია.
+const visibleOnSite = () => and(eq(parts.isPublished, true), gt(parts.stock, 0));
+
 // მომხმარებლის %, _ და \ ჩვეულებრივ სიმბოლოებად ეძებება.
 function containsPattern(q: string): string {
   return `%${q.replace(/[\\%_]/g, "\\$&")}%`;
@@ -76,7 +79,7 @@ export async function querySuggestions(q: string, model: CarModelSlug | undefine
     .from(parts)
     .where(
       and(
-        eq(parts.isPublished, true),
+        visibleOnSite(),
         model ? arrayContains(parts.models, [model]) : undefined,
         or(ilike(parts.name, pattern), ilike(parts.oemCode, pattern)),
       ),
@@ -85,11 +88,11 @@ export async function querySuggestions(q: string, model: CarModelSlug | undefine
     .limit(6);
 }
 
-export async function queryParts(filters: PartFilters, options: { onlyPublished: boolean }) {
+export async function queryParts(filters: PartFilters, options: { onlyVisible: boolean }) {
   const db = getDb();
   const pattern = filters.q ? containsPattern(filters.q) : undefined;
   const where = and(
-    options.onlyPublished ? eq(parts.isPublished, true) : undefined,
+    options.onlyVisible ? visibleOnSite() : undefined,
     filters.model ? arrayContains(parts.models, [filters.model]) : undefined,
     // კატეგორიის არჩევისას მისი ქვეკატეგორიების ნაწილებიც ჩანს.
     filters.categoryId
@@ -112,6 +115,7 @@ export async function queryParts(filters: PartFilters, options: { onlyPublished:
         imageUrl: parts.imageUrl,
         models: parts.models,
         isPublished: parts.isPublished,
+        stock: parts.stock,
         categoryName: categories.name,
         parentCategoryName: parentCategory.name,
       })
@@ -152,7 +156,7 @@ export async function queryPublishedPart(id: number) {
     .from(parts)
     .innerJoin(categories, eq(parts.categoryId, categories.id))
     .leftJoin(parentCategory, eq(categories.parentId, parentCategory.id))
-    .where(and(eq(parts.id, id), eq(parts.isPublished, true)));
+    .where(and(eq(parts.id, id), visibleOnSite()));
   return part ?? null;
 }
 
@@ -160,12 +164,12 @@ export async function queryPriceRange(model: CarModelSlug | undefined) {
   const [range] = await getDb()
     .select({ min: min(parts.price), max: max(parts.price) })
     .from(parts)
-    .where(and(eq(parts.isPublished, true), model ? arrayContains(parts.models, [model]) : undefined));
+    .where(and(visibleOnSite(), model ? arrayContains(parts.models, [model]) : undefined));
   return range;
 }
 
 export async function queryCategoryTree(options: {
-  onlyPublished: boolean;
+  onlyVisible: boolean;
   model?: CarModelSlug;
 }): Promise<CategoryNode[]> {
   const db = getDb();
@@ -176,7 +180,7 @@ export async function queryCategoryTree(options: {
       .from(parts)
       .where(
         and(
-          options.onlyPublished ? eq(parts.isPublished, true) : undefined,
+          options.onlyVisible ? visibleOnSite() : undefined,
           options.model ? arrayContains(parts.models, [options.model]) : undefined,
         ),
       )
